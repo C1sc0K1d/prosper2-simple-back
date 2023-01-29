@@ -55,7 +55,6 @@ public class UserController {
 
     private class ErrorResponse {
         private String message;
-
         public String getMessage() {
             return message;
         }

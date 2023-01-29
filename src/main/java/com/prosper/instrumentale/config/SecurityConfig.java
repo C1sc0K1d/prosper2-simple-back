@@ -35,11 +35,4 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
-   @Bean
-    protected void configure(HttpSecurity security) throws Exception {
-        security
-                .httpBasic().disable()
-                .formLogin().disable();
-    }
 }

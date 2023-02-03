@@ -21,7 +21,10 @@ public class UserMapper {
                 .id(userRequest.getId())
                 .userName(userRequest.getUserName())
                 .isAdmin(userRequest.getIsAdmin())
-                .password(userRequest.getPassword()).build();
+                .password(userRequest.getPassword())
+                .phone(userRequest.getPhone())
+                .address(userRequest.getAddress())
+                .email(userRequest.getEmail()).build();
     }
 
     public UserDto toUserDto(User user) {
@@ -29,7 +32,10 @@ public class UserMapper {
                 .id(user.getId())
                 .userName(user.getUserName())
                 .isAdmin(user.getIsAdmin())
-                .password(user.getPassword()).build();
+                .password(user.getPassword())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .email(user.getEmail()).build();
     }
 
     public List<UserDto> toUserListDto(List<User> users) {

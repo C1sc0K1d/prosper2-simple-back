@@ -34,6 +34,20 @@ public class UserService {
         return this.userMapper.toSingleResult(user);
     }
 
+    public UserResponse updateUser(UserRequest userRequest) {
+        var user = userRepository.findById(userRequest.getId()).get();
+
+        if (userRequest.getIsAdmin() != null) user.setIsAdmin(userRequest.getIsAdmin());
+
+        user.setAddress(userRequest.getAddress());
+        user.setPassword(userRequest.getPassword());
+        user.setPhone(userRequest.getPhone());
+        user.setEmail(userRequest.getEmail());
+
+        user = userRepository.save(user);
+        return userMapper.toSingleResult(user);
+    }
+
     @Transactional(readOnly = true)
     public UserListResponse getAllUsers() {
         return this.userMapper.toListResult(this.userRepository.findAll());

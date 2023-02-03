@@ -17,4 +17,10 @@ public class UserRequest {
     private String password;
 
     private Boolean isAdmin;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
 }

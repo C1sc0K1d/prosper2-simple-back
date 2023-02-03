@@ -52,6 +52,17 @@ public class UserController {
         }
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest) {
+        try {
+            return new ResponseEntity<>(service.updateUser(userRequest), HttpStatus.OK);
+        } catch (Exception ex) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("User Not Found!!");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     private class ErrorResponse {
         private String message;

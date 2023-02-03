@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,4 +20,10 @@ public class UserDto {
     private String password;
 
     private Boolean isAdmin;
+
+    private String email;
+
+    private String phone;
+
+    private String address;
 }

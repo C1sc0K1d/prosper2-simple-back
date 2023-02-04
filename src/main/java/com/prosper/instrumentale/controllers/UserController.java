@@ -23,8 +23,8 @@ public class UserController {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Token", "13213729");
-            this.service.login(userRequest);
-            return new ResponseEntity<>(service.login(userRequest), headers, HttpStatus.OK);
+            var login = this.service.login(userRequest);
+            return new ResponseEntity<>(login, headers, HttpStatus.OK);
         } catch (Exception ex) {
             ErrorResponse errorResponse = new ErrorResponse();
             errorResponse.setMessage("User don't exist!");
@@ -33,8 +33,15 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public UserResponse addUser(@RequestBody UserRequest userRequest) {
-        return service.addUser(userRequest);
+    public ResponseEntity<?> addUser(@RequestBody UserRequest userRequest) {
+        try {
+            var userAdded = service.addUser(userRequest);
+            return new ResponseEntity<>(userAdded, HttpStatus.OK);
+        } catch (Exception ex) {
+            ErrorResponse errorResponse = new ErrorResponse();
+            errorResponse.setMessage("User already exist");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping()

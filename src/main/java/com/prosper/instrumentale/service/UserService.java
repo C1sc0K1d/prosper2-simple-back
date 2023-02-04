@@ -1,6 +1,7 @@
 package com.prosper.instrumentale.service;
 
 import com.prosper.instrumentale.dto.UserDto;
+import com.prosper.instrumentale.entities.User;
 import com.prosper.instrumentale.mapper.UserMapper;
 import com.prosper.instrumentale.repositories.UserRepository;
 import com.prosper.instrumentale.request.UserRequest;
@@ -26,7 +27,15 @@ public class UserService {
         return this.userMapper.toSingleResult(userRepository.findByUserNameAndPassword(userRequest.getUserName().toLowerCase(Locale.ROOT), userRequest.getPassword()));
     }
 
-    public UserResponse addUser(UserRequest userRequest) {
+    public UserResponse addUser(UserRequest userRequest) throws Exception {
+        var haveUser = userRepository.findByUserName(userRequest.getUserName().toLowerCase());
+
+        System.out.println(haveUser);
+
+        if (haveUser != null) {
+            throw new Exception("User Aready Exist");
+        };
+
         var user = userMapper.toUser(userRequest);
         user.setUserName(userRequest.getUserName().toLowerCase(Locale.ROOT));
         if (userRequest.getIsAdmin() == null) user.setIsAdmin(false);
